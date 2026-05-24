@@ -1,0 +1,16 @@
+Trip ID,Employee ID,Category,Departure Date,Origin,Destination,Class,Distance (km),Nights,Country,Vendor,Check In,Check Out
+TRP-10291,EMP-00341,Air Travel,2024-01-15,LHR,JFK,Business,,,,British Airways,,
+TRP-10291,EMP-00341,Air Travel,2024-01-22,JFK,LHR,Economy,,,,American Airlines,,
+TRP-10291,EMP-00341,Hotel,2024-01-15,,,,,7,US,Marriott,2024-01-15,2024-01-22
+TRP-10292,EMP-00892,Air Travel,2024-01-18,AMS,MUC,Economy,680,,,KLM,,
+TRP-10292,EMP-00892,Hotel,2024-01-18,,,,,2,DE,Novotel,2024-01-18,2024-01-20
+TRP-10293,EMP-00341,Ground,2024-01-09,,,,145,,,Enterprise,,
+TRP-10294,EMP-00127,Rail,2024-02-03,LON,MAN,Standard,302,,,Avanti West Coast,,
+TRP-10295,EMP-00567,Air Travel,2024-02-12,LHR,SIN,Business,,,,Singapore Airlines,,
+TRP-10295,EMP-00567,Hotel,2024-02-13,,,,,5,SG,Marriott,2024-02-13,2024-02-18
+TRP-10295,EMP-00567,Air Travel,2024-02-18,SIN,LHR,Economy,,,,Singapore Airlines,,
+TRP-10296,EMP-00892,Air Travel,2024-03-05,FRA,CDG,Economy,480,,,Lufthansa,,
+TRP-10297,EMP-00341,Air Travel,2024-03-18,LHR,JFK,Economy,,,,Delta,,
+TRP-10297,EMP-00341,Hotel,2024-03-18,,,,,3,US,Hilton,2024-03-18,2024-03-21
+TRP-10297,EMP-00341,Air Travel,2024-03-21,JFK,LHR,Economy,,,,Delta,,
+TRP-10298,EMP-00127,Ground,2024-03-25,,,,220,,,Hertz,,
