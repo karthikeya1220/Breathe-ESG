@@ -8,7 +8,7 @@ class DataSourceViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return DataSource.objects.filter(org=self.request.org)
+        return DataSource.objects.filter(org=self.request.user.org)
 
 
 class IngestionJobViewSet(viewsets.ReadOnlyModelViewSet):
@@ -16,4 +16,4 @@ class IngestionJobViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return IngestionJob.objects.filter(org=self.request.org).select_related('data_source')
+        return IngestionJob.objects.filter(org=self.request.user.org).select_related('data_source')

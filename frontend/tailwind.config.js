@@ -23,6 +23,7 @@ export default {
           700: '#0d7741',
           800: '#0f5e36',
           900: '#0d4d2e',
+          950: '#06311b',
         },
         // Dark surface palette
         surface: {

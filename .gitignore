@@ -21,9 +21,5 @@ frontend/.env.production
 # OS
 .DS_Store
 *.DS_Store
-/SOURCES.md
-/MODEL.md
 /TASKS.md
-/DECISIONS.md
-/TRADEOFFS.md
 /PROJECT_CONTEXT.md

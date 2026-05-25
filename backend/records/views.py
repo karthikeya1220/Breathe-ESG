@@ -23,7 +23,7 @@ class EmissionRecordViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         qs = EmissionRecord.objects.filter(
-            org=self.request.org
+            org=self.request.user.org
         ).select_related(
             'data_source', 'emission_factor', 'raw_record', 'locked_by'
         ).prefetch_related('reviews__reviewer')
@@ -77,7 +77,7 @@ class EmissionRecordViewSet(viewsets.ReadOnlyModelViewSet):
         # Append-only review event
         AnalystReview.objects.create(
             emission_record=record,
-            org=request.org,
+            org=request.user.org,
             reviewer=request.user,
             action=action_value,
             comment=comment,
@@ -85,7 +85,7 @@ class EmissionRecordViewSet(viewsets.ReadOnlyModelViewSet):
 
         # Audit trail
         AuditEvent.objects.create(
-            org=request.org,
+            org=request.user.org,
             actor=request.user,
             event_type=f'RECORD_{action_value}',
             object_type='EmissionRecord',

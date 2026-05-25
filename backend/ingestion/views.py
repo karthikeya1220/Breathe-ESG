@@ -87,7 +87,7 @@ def upload_view(request):
 
     # Validate source belongs to org
     try:
-        data_source = DataSource.objects.get(id=source_id, org=request.org)
+        data_source = DataSource.objects.get(id=source_id, org=request.user.org)
     except DataSource.DoesNotExist:
         return Response({'error': 'Data source not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -106,7 +106,7 @@ def upload_view(request):
         }, status=status.HTTP_409_CONFLICT)
 
     # Save file to media storage
-    upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', str(request.org.id))
+    upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', str(request.user.org.id))
     os.makedirs(upload_dir, exist_ok=True)
     file_path = os.path.join(upload_dir, f"{file_hash}_{file_obj.name}")
     with open(file_path, 'wb') as f:
@@ -116,7 +116,7 @@ def upload_view(request):
     # Create IngestionJob
     job = IngestionJob.objects.create(
         data_source=data_source,
-        org=request.org,
+        org=request.user.org,
         triggered_by=request.user,
         status=IngestionJob.Status.PROCESSING,
         raw_file_path=relative_path,
@@ -126,7 +126,7 @@ def upload_view(request):
     )
 
     AuditEvent.objects.create(
-        org=request.org,
+        org=request.user.org,
         actor=request.user,
         event_type='JOB_STARTED',
         object_type='IngestionJob',
@@ -171,7 +171,7 @@ def upload_view(request):
 
         raw_record = RawRecord.objects.create(
             ingestion_job=job,
-            org=request.org,
+            org=request.user.org,
             row_number=row['row_number'],
             raw_data=row['raw_data'],
             parse_status=parse_status_map.get(row_status, RawRecord.ParseStatus.PARSE_ERROR),
@@ -200,7 +200,7 @@ def upload_view(request):
             co2e_kg = row['quantity_normalized'] * emission_factor.factor_kg_co2e
 
         EmissionRecord.objects.create(
-            org=request.org,
+            org=request.user.org,
             raw_record=raw_record,
             data_source=data_source,
             scope=row['scope'],
@@ -227,7 +227,7 @@ def upload_view(request):
     job.save()
 
     AuditEvent.objects.create(
-        org=request.org,
+        org=request.user.org,
         actor=request.user,
         event_type='JOB_COMPLETED',
         object_type='IngestionJob',
